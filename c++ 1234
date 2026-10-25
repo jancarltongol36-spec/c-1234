@@ -1,0 +1,76 @@
+Right angle triangle
+#include <iostream>
+using namespace std;
+
+int main () {
+    int rows = 6;
+    for (int i = 1; i <= rows; i++) {
+        for (int j = 1; j <= i; j++) {
+            cout << "* ";
+        }
+        cout << endl;    
+    }
+    
+    return 0;
+}
+
+
+-----------------------------------------------
+Left angle triangle
+#include <iostream>
+using namespace std;
+
+int main() {
+    int rows = 6;
+    
+    for (int i = 1; i <= rows; i++) {
+        for (int s = 1; s <= rows - i; s++) {
+            cout << " ";
+        }
+        for (int j = 1; j <= i; j++) {
+            cout << "*";
+        }
+        
+        cout << endl;
+    }
+    
+    return 0;
+}
+
+
+
+------------------------------------------------
+
+const int LED_COUNT = 3; 
+const int ledPins[LED_COUNT] = {13, 12, 11}; 
+int current = 0; 
+
+void allOff(){ 
+  for(int i = 0; i < LED_COUNT; i++){ 
+    digitalWrite(ledPins[i], LOW);
+  } 
+} 
+
+void lightOne(int index, int ms){ 
+  allOff(); 
+  digitalWrite(ledPins[index], HIGH); 
+  delay(ms); 
+} 
+
+int nextIndex(int index){ 
+  return (index + 1) % LED_COUNT; 
+} 
+
+void setup(){ 
+  for (int i = 0; i < LED_COUNT; i++){ 
+    pinMode(ledPins[i], OUTPUT);
+  } 
+  Serial.begin(9600);
+} 
+
+void loop(){ 
+  lightOne(current, 300); 
+  Serial.print("lit LED on pin: "); 
+  Serial.println(ledPins[current]);
+  current = nextIndex(current);
+}
